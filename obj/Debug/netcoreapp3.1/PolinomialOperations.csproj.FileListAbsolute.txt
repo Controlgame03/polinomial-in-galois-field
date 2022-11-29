@@ -1,0 +1,16 @@
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.csproj.AssemblyReference.cache
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.Form1.resources
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.csproj.GenerateResource.cache
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.AssemblyInfoInputs.cache
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.AssemblyInfo.cs
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.csproj.CoreCompileInputs.cache
+C:\Users\hp220\source\repos\GaloisField\bin\Debug\netcoreapp3.1\PolinomialOperations.exe
+C:\Users\hp220\source\repos\GaloisField\bin\Debug\netcoreapp3.1\PolinomialOperations.deps.json
+C:\Users\hp220\source\repos\GaloisField\bin\Debug\netcoreapp3.1\PolinomialOperations.runtimeconfig.json
+C:\Users\hp220\source\repos\GaloisField\bin\Debug\netcoreapp3.1\PolinomialOperations.runtimeconfig.dev.json
+C:\Users\hp220\source\repos\GaloisField\bin\Debug\netcoreapp3.1\PolinomialOperations.dll
+C:\Users\hp220\source\repos\GaloisField\bin\Debug\netcoreapp3.1\PolinomialOperations.pdb
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.dll
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.pdb
+C:\Users\hp220\source\repos\GaloisField\obj\Debug\netcoreapp3.1\PolinomialOperations.genruntimeconfig.cache
