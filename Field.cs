@@ -18,6 +18,10 @@ namespace PolinomialOperations
 
         ArrayList elements;
 
+        ArrayList nullElement = new ArrayList();
+        ArrayList firstElement = new ArrayList();
+
+
         /*for tests*/
         //<---------------------->
         //begin
@@ -48,6 +52,14 @@ namespace PolinomialOperations
             }
 
             moduleDegree = degreeIterator;
+
+            for (int arrayIterator = 0; arrayIterator < moduleDegree; arrayIterator++)
+            {
+                nullElement.Add(0);
+            }
+
+            firstElement = (ArrayList)nullElement.Clone();
+            firstElement[0] = 1;
 
             if (moduleDegree == 1)
             {
@@ -115,7 +127,7 @@ namespace PolinomialOperations
                     }
                     else
                     {
-                        resultValue = (int)b[iterator] - (int)a[iterator];
+                        resultValue = (int)a[iterator] - (int)b[iterator] + module;
                     }
                     result.Add(resultValue % module);
                 }
@@ -143,8 +155,33 @@ namespace PolinomialOperations
 
             if (isFieldElement(first) && isFieldElement(second))
             {
-                int firstDegree = getFieldElementPosition(first) - 2; // because field contains 0 and 1
-                int secondDegree = getFieldElementPosition(second) - 2;
+                if (moduleDegree == 1)
+                {
+                    result.Add(((int)first[0] * (int)second[0]) % module);
+                    return result;
+                }
+
+                if ((first.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default) 
+                    || (second.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default))
+                {
+                    result = (ArrayList)nullElement.Clone();
+                    return result;
+                }
+
+                if ((first.ToArray() as IStructuralEquatable).Equals(firstElement.ToArray(), EqualityComparer<int>.Default))
+                {
+                    result = (ArrayList)second.Clone();
+                    return result;
+                }
+
+                if ((second.ToArray() as IStructuralEquatable).Equals(firstElement.ToArray(), EqualityComparer<int>.Default))
+                {
+                    result = (ArrayList)first.Clone();
+                    return result;
+                }
+
+                int firstDegree = getFieldElementPosition(first) - 1; // because field contains 0 and 1
+                int secondDegree = getFieldElementPosition(second) - 1;
 
                 if(firstDegree == -1 || secondDegree == -1) // 0 * a = 0, a * 0 = 0, 0 * 0 = 0
                 {
@@ -160,15 +197,10 @@ namespace PolinomialOperations
                     return first;
                 }
 
-                int degreeEqualPrimitiveElement = size - 2;
+                int degreeEqualPrimitiveElement = size - 1;
                 int resultDegree = (firstDegree + secondDegree) % degreeEqualPrimitiveElement;
 
-                if(resultDegree >= 25)
-                {
-                    bool stop = true;
-                }
-
-                result = (ArrayList)elements[resultDegree + 2]; // because field contains 0 and 1
+                result = (ArrayList)elements[resultDegree + 1]; // because field contains 0 and 1
                 return result;
             }
             else
@@ -189,6 +221,7 @@ namespace PolinomialOperations
         public string fieldToString()
         {
             string result = "0\n1\n";
+
             if (moduleDegree == 1)
             {
                 for (int element = 2; element < module; element++)
@@ -199,24 +232,17 @@ namespace PolinomialOperations
             }
             else
             {
+
                 for (int elementIterator = 2; elementIterator < elements.Count; elementIterator++)
                 {
                     ArrayList element = (ArrayList)elements[elementIterator];
-                    string elementToString = "";
+                    string elementS = "";
 
                     for (int iterator = 0; iterator < element.Count; iterator++)
                     {
-                        if ((int)element[iterator] == 0) continue;
-                        if (elementToString.Length != 0) elementToString += " + ";
-                        if ((int)element[iterator] != 1) elementToString += element[iterator];
-                        if ((int)element[iterator] == 1 && iterator == 0) elementToString += element[iterator];
-                        if (iterator == 0) continue;
-
-                        elementToString += "a^(";
-                        elementToString += iterator;
-                        elementToString += ")";
+                        elementS = elementToString(element);
                     }
-                    result += elementToString;
+                    result += elementS;
                     result += '\n';
                 }
             }
@@ -227,6 +253,11 @@ namespace PolinomialOperations
         public string elementToString(ArrayList element)
         {
             string result = "";
+
+            if ((element.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default))
+            {
+                return "0";
+            }
 
             for (int iterator = 0; iterator < element.Count; iterator++)
             {

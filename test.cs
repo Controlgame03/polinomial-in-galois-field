@@ -15,13 +15,12 @@ namespace PolinomialOperations
         public static void operationTest() {
             ArrayList primitivePolinomial = new ArrayList();
             /*
-            * для поля 3^3 с многочленом x^3 + 2x^2 + 1*/
-            primitivePolinomial.Add(1);
-            primitivePolinomial.Add(0);
+            * для поля 3^2 с многочленом x^2 + x^1 + 2*/
             primitivePolinomial.Add(2);
             primitivePolinomial.Add(1);
+            primitivePolinomial.Add(1);
 
-            Field f = new Field(27, 3, primitivePolinomial);
+            Field f = new Field(9, 3, primitivePolinomial);
             //Field f = new Field(11, 11, primitivePolinomial);
 
             string fieldToString = f.fieldToString();
@@ -59,7 +58,7 @@ namespace PolinomialOperations
     Сделал опреации сложения, вычитания и умножения. Не до конца отладил.
     На след. раз --->   <-> Полностью отладить сложение, вычитание и умножение;
                         <-> Особо учитывать момет поля GF(p^1);
-                        <-> Написать метод деления елементов (переделать сложение);
+                        <-> Написать метод деления элементов (переделать умножение);
                         <-> Написать метод для поиска обратного элемента (возможны трудности)
  
  */
