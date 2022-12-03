@@ -1,80 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 
 namespace PolinomialOperations
 {
     class Polinomial
     {
-        public Polinomial()
-        {
+        Field field;
+        ArrayList polinomial;
 
+        int polinomialSize;
+
+        public Polinomial(ArrayList _polinomial, Field _field)
+        {
+            field = _field;
+            polinomial = _polinomial;
+            polinomialSize = polinomial.Count;
         }
 
-        public Polinomial(byte _value)
-        {
-         
+        public String polinomialToString() {
+            String result = "";
+
+            for(int iterator = 0; iterator < polinomialSize; iterator++)
+            {
+                result += Field.elementToString((ArrayList)polinomial[iterator]);
+                result += " x^(";
+                result += iterator;
+                result += ") + ";
+            }
+
+            return result;
         }
-
-       static Polinomial()
-        {
-           
-        }
-
-        //getters and setters
-        public byte getValue()
-        {
-            return new byte();
-        }
-
-        public void setValue(byte _value)
-        {
-            
-        }
-
-        
-
-        public static Polinomial operator+(Polinomial Fa, Polinomial Fb)
-        {
-            return new Polinomial();
-        }
-
-        public static Polinomial operator-(Polinomial Fa, Polinomial Fb)
-        {
-            return new Polinomial();
-        }
-
-        public static Polinomial operator*(Polinomial Fa, Polinomial Fb)
-        {
-            return new Polinomial();
-        }
-
-        public static Polinomial operator/(Polinomial Fa, Polinomial Fb)
-        {
-            return new Polinomial();
-        }
-
-        public static bool operator==(Polinomial Fa, Polinomial Fb)
-        {
-            return new bool();
-        }
-
-        public static bool operator!=(Polinomial Fa, Polinomial Fb)
-        {
-            return new bool();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return new bool();
-        }
-
-        public override int GetHashCode()
-        {
-            return new int();
-        }
-
-        //toString
-
     }
 }

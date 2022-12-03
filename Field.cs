@@ -21,22 +21,6 @@ namespace PolinomialOperations
         ArrayList nullElement = new ArrayList();
         ArrayList firstElement = new ArrayList();
 
-
-        /*for tests*/
-        //<---------------------->
-        //begin
-
-        public bool isFieldElement(ArrayList element) // converte to private later
-        {
-            return ((getFieldElementPosition(element) == -1) ? false : true);
-        }
-        public ArrayList getElements()
-        {
-            return elements;
-        }
-
-        //end
-        //<---------------------->
         public Field(int _size, int _module, ArrayList _primitivePolinomial)
         {
             size = _size;
@@ -83,6 +67,10 @@ namespace PolinomialOperations
                     Console.WriteLine("primitive polinomial for this galous field not founded");
                 }
             }
+        }
+
+        public ArrayList getElements() {
+            return elements;
         }
 
         public ArrayList sumElements(ArrayList a, ArrayList b)
@@ -269,9 +257,14 @@ namespace PolinomialOperations
             return result;
         }
 
-        public string elementToString(ArrayList element)
+        public static string elementToString(ArrayList element)
         {
             string result = "";
+            ArrayList nullElement = new ArrayList();
+            for (int arrayIterator = 0; arrayIterator < element.Count; arrayIterator++)
+            {
+                nullElement.Add(0);
+            }
 
             if ((element.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default))
             {
@@ -294,6 +287,19 @@ namespace PolinomialOperations
             return result;
         }
 
+        public bool Equals(Field f2)
+        {
+            if ((elements.ToArray() as IStructuralEquatable).Equals(f2.elements.ToArray(), EqualityComparer<int>.Default))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool isFieldElement(ArrayList element) // converte to private later
+        {
+            return ((getFieldElementPosition(element) == -1) ? false : true);
+        }
         private bool isPrimitivePolinomial(ArrayList polinomial)
         {
             bool nullPolinomial = true;

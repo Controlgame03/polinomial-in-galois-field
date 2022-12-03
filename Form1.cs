@@ -44,40 +44,7 @@ namespace PolinomialOperations
                 MessageBox.Show("Проверьте корректность введёных данных");
                 return;
             }
-
-            Polinomial f1 = new Polinomial(q1);
-            Polinomial f2 = new Polinomial(q2);
-            Polinomial f3;
-            switch (comboBox1.Text)
-            {
-                case "+":
-                    f3 = f1 + f2;
-                    textBox3.Text = CreatePolynom(f3.getValue());
-                    break;
-                case "-":
-                    f3 = f1 - f2;
-                    textBox3.Text = CreatePolynom(f3.getValue());
-                    break;
-                case "*":
-                    f3 = f1 * f2;
-                    textBox3.Text = CreatePolynom(f3.getValue());
-                    break;
-                case "/":
-                    f3 = f1 / f2;
-                    textBox3.Text = CreatePolynom(f3.getValue());
-                    break;
-                case "^":
-                    sbyte tmp;
-                    try
-                    {
-                        tmp = Convert.ToSByte(textBox4.Text);
-                       // textBox3.Text = CreatePolynom(Field.pow(f1, tmp).getValue()) + ";" + CreatePolynom(Field.pow(f2, tmp).getValue());
-                    } catch (Exception)
-                    {
-                        break;
-                    }
-                    break;
-            }
+           
 
             if (textBox3.Text == "")
             {
