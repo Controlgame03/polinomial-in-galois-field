@@ -29,11 +29,10 @@ namespace PolinomialOperations
             primitivePolinomial.Add(1);
             primitivePolinomial.Add(0);
             primitivePolinomial.Add(0);
-            primitivePolinomial.Add(0);
             primitivePolinomial.Add(1);
 
-            Field f = new Field(81, 3, primitivePolinomial);
-            //Field f = new Field(11, 11, primitivePolinomial);
+            //Field f = new Field(81, 3, primitivePolinomial);
+            Field f = new Field(11, 11, primitivePolinomial);
 
             string fieldToString = f.fieldToString();
 
@@ -70,16 +69,15 @@ namespace PolinomialOperations
             primitivePolinomial.Add(1);
             primitivePolinomial.Add(0);
             primitivePolinomial.Add(0);
-            primitivePolinomial.Add(0);
             primitivePolinomial.Add(1);
 
-            Field f = new Field(81, 3, primitivePolinomial);
-            //Field f = new Field(11, 11, primitivePolinomial);
+            //Field f = new Field(81, 3, primitivePolinomial);
+            Field f = new Field(11, 11, primitivePolinomial);
 
             string fieldToString = f.fieldToString();
 
             string result = f.ToString() + "\n\n\n" + "<------------------------->\n";
-            string operation = " * ";
+            string operation = " / ";
 
             ArrayList elements = f.getElements();
 
@@ -92,7 +90,7 @@ namespace PolinomialOperations
                 ArrayList a = (ArrayList)elements[rand.Next(0, elements.Count - 1)];
                 ArrayList b = (ArrayList)elements[rand.Next(0, elements.Count - 1)];
 
-                ArrayList resultOperation = f.multiplyElements(a, b);
+                ArrayList resultOperation = f.divideElements(a, b);
                 result += "(" + f.elementToString(a) + ")" + operation + "(" + f.elementToString(b) + ")" + " == " + "(" + f.elementToString(resultOperation) + ")\n";
                 if (f.isFieldElement(resultOperation))
                 {
@@ -103,8 +101,6 @@ namespace PolinomialOperations
             result += "true = " + trues;
             Console.Read();
         }
-        /*
-         exception при first.Degree = 39, second.Degree = 40*/
     }
 }
 
@@ -124,5 +120,7 @@ namespace PolinomialOperations
     На след. раз --->   <-> Отладить умножение;
                         <-> Написать метод деления элементов (переделать умножение);
                         <-> Отладить вычисление обратного элемнта
-
+03.12 (8:00 - 10:30)
+    Дебаг операции умножения. Дебаг операции обратного элемента. Написал и продебажил операцию вычисления обратоного элемента.
+    
  */

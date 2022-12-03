@@ -197,7 +197,7 @@ namespace PolinomialOperations
                     return first;
                 }
 
-                int degreeEqualPrimitiveElement = size - 2;
+                int degreeEqualPrimitiveElement = size - 1;
                 int resultDegree = (firstDegree + secondDegree) % degreeEqualPrimitiveElement;
 
                 result = (ArrayList)elements[resultDegree + 1]; // because field contains 0 and 1
@@ -220,86 +220,7 @@ namespace PolinomialOperations
 
         public ArrayList divideElements(ArrayList first, ArrayList second) // first \ second
         {
-            ArrayList result = new ArrayList();
-
-            if ((second.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default))
-            {
-                try
-                {
-                    throw new Exception();
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("divide by zero");
-                }
-
-            }
-            else
-            { 
-                if (isFieldElement(first) && isFieldElement(second))
-                {
-                    if (moduleDegree == 1) // uncorrect
-                    {
-                        result.Add(((int)first[0] * (int)second[0]) % module);
-                        return result;
-                    }
-
-                    if ((first.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default)
-                        || (second.ToArray() as IStructuralEquatable).Equals(nullElement.ToArray(), EqualityComparer<int>.Default))
-                    {
-                        result = (ArrayList)nullElement.Clone();
-                        return result;
-                    }
-
-                    if ((first.ToArray() as IStructuralEquatable).Equals(firstElement.ToArray(), EqualityComparer<int>.Default))
-                    {
-                        result = (ArrayList)second.Clone();
-                        return result;
-                    }
-
-                    if ((second.ToArray() as IStructuralEquatable).Equals(firstElement.ToArray(), EqualityComparer<int>.Default))
-                    {
-                        result = (ArrayList)first.Clone();
-                        return result;
-                    }
-
-                    int firstDegree = getFieldElementPosition(first) - 1; // because field contains 0 and 1
-                    int secondDegree = getFieldElementPosition(second) - 1;
-
-                    if (firstDegree == -1 || secondDegree == -1) // 0 * a = 0, a * 0 = 0, 0 * 0 = 0
-                    {
-                        return (ArrayList)elements[0]; // null element
-                    }
-
-                    if (firstDegree == 0) // 1 * a = a
-                    {
-                        return second;
-                    }
-                    if (secondDegree == 0) // a * 1 = a
-                    {
-                        return first;
-                    }
-
-                    int degreeEqualPrimitiveElement = size - 1;
-                    int resultDegree = (firstDegree + secondDegree) % degreeEqualPrimitiveElement;
-
-                    result = (ArrayList)elements[resultDegree + 1]; // because field contains 0 and 1
-                    return result;
-                }
-                else
-                {
-                    try
-                    {
-                        throw new Exception();
-                    }
-                    catch
-                    {
-                        Console.WriteLine(first.ToString() + ", " + second.ToString() + " is not found with field\n");
-                    }
-                }
-            }
-
-            return result;
+            return multiplyElements(first, this.inverseElement(second));
         }
 
         public ArrayList inverseElement(ArrayList element) {
