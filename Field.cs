@@ -73,6 +73,11 @@ namespace PolinomialOperations
             return elements;
         }
 
+        public ArrayList getNullElement()
+        {
+            return nullElement;
+        }
+
         public ArrayList sumElements(ArrayList a, ArrayList b)
         {
             ArrayList result = new ArrayList();
