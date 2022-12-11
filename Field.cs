@@ -374,7 +374,7 @@ namespace PolinomialOperations
             return result;
         }
 
-        private int getFieldElementPosition(ArrayList element) // converte to private later
+        public int getFieldElementPosition(ArrayList element) // converte to private later
         {
             int found = -1;
             for (int elementIterator = 0; elementIterator < elements.Count; elementIterator++)

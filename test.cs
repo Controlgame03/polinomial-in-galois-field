@@ -9,7 +9,7 @@ namespace PolinomialOperations
     {
         static void Main(String[] argv)
         {
-            int flag = 4;
+            int flag = 3;
             switch (flag)
             {
                 case 0:
@@ -88,40 +88,79 @@ namespace PolinomialOperations
             primitivePolinomial.Add(0);
             primitivePolinomial.Add(1);
 
-            //Field f = new Field(81, 3, primitivePolinomial);
-            Field f = new Field(11, 11, primitivePolinomial);
+            Field f = new Field(81, 3, primitivePolinomial);
+            //Field f = new Field(11, 11, primitivePolinomial);
             ArrayList elements = f.getElements();
             Random rand = new Random(); //rand.Next(0, n)
 
-            int testNumber = 1;
+            int testNumber = 100;
+            int trues = 0;
+            int falses = 0;
             for (int i = 0; i < testNumber; i++)
             {
-                ArrayList p1 = new ArrayList();
-                int p1Size = rand.Next(5, 10);
-
+                ArrayList a = new ArrayList();
+                int p1Size = rand.Next(2, 10);
+                /*
+                a.Add(elements[2]);
+                a.Add(elements[0]);
+                a.Add(elements[5]);
+                a.Add(elements[3]);
+                a.Add(elements[1]);
+                */
                 for (int j = 0; j < p1Size; j++)
                 {
-                    p1.Add(elements[rand.Next(0, elements.Count)]);
+                    a.Add(elements[rand.Next(0, elements.Count)]);
                 }
 
-                ArrayList p2 = new ArrayList();
-                int p2Size = rand.Next(5, 10) + 1;
-
+                ArrayList b = new ArrayList();
+                int p2Size = rand.Next(2, 10);
+                /*
+                b.Add(elements[10]);
+                b.Add(elements[6]);
+                b.Add(elements[1]);*/
+                
                 for (int j = 0; j < p2Size; j++)
                 {
-                    p2.Add(elements[rand.Next(0, elements.Count)]);
+                    b.Add(elements[rand.Next(0, elements.Count)]);
                 }
-
-                Polinomial pp1 = new Polinomial(p1, f);
-                Polinomial pp2 = new Polinomial(p2, f);
-                Polinomial resPoliom = pp1.difference(pp1, pp2);
-
-                result += pp1.polinomialToString();
-                result += "    -    ";
-                result += pp2.polinomialToString();
+                
+                Polinomial aa = new Polinomial(a, f);
+                Polinomial bb = new Polinomial(b, f);
+                Polinomial c = aa.divide(aa, bb);
+                Polinomial r = aa.getRemainder();
+                /*result += aa.polinomialToString();
+                result += "    /    ";
+                result += bb.polinomialToString();
                 result += "     ==    ";
-                result += resPoliom.polinomialToString();
-                result += "\n";
+                result += c.polinomialToString();
+                result += "\n\n";
+                */
+                Polinomial d = c.multiply(c, bb);
+                Polinomial res = d.sum(d, r);
+                /*result += c.polinomialToString();
+                result += "    *    ";
+                result += bb.polinomialToString();
+                result += "     ==    ";
+                result += d.polinomialToString();
+                result += "\n\n";
+
+                result += d.polinomialToString();
+                result += "    +    ";
+                result += r.polinomialToString();
+                result += "     ==    ";
+                result += res.polinomialToString();
+                result += "\n\n\n";
+               */
+
+
+                if (res.equals(aa))
+                {
+                    trues++;
+                }
+                else
+                {
+                    falses++;
+                }
             }
 
 
@@ -278,4 +317,7 @@ namespace PolinomialOperations
     Написал toString и механицм инициализации многочленов.
     Написал операцию сложения, вычитания многочленов и вычисление значения в точке
     На след.раз --->    <-> Написать операцию деления и умножения многочленов
+11.12 (8:00 - 12:00)
+    Написал и отладил деление и умножение.
+    На след.раз --->    <-> Написать UI на WindowsForms
  */

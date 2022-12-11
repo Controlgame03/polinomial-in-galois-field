@@ -96,7 +96,7 @@ namespace PolinomialOperations
             
             return res1;
         }
-
+        
         private void button2_Click(object sender, EventArgs e)
         {
             byte q1 = 0, q2 = 0;
@@ -210,5 +210,34 @@ namespace PolinomialOperations
             MessageBox.Show("Файл сохранен");
         }
 
+        private void tb_polynom1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
