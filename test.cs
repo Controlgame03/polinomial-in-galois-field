@@ -7,7 +7,7 @@ namespace PolinomialOperations
 {
     class test
     {
-        static void Main(String[] argv)
+        /*static void Main(String[] argv)
         {
             int flag = 3;
             switch (flag)
@@ -30,7 +30,7 @@ namespace PolinomialOperations
 
             }
            
-        }
+        }*/
 
         public static void polinomialValueTest()
         {

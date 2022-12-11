@@ -7,55 +7,90 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace PolinomialOperations
 {
     public partial class Form1 : Form
     {
+        int prime = 2;
+        int degree = 1;
+        int fieldSize = 0;
+
+        static int MAX_DEGREE = 6;
+        static int MIN_DEGREE = 1;
+        static int MAX_PRIME = 100;
+        static int MIN_PRIME = 2;
+
+        ArrayList boxes = new ArrayList();
+        ArrayList labels = new ArrayList();
+
+        ArrayList polinom1Boxes = new ArrayList();
+        ArrayList polinom1Labels = new ArrayList();
+
+        ArrayList polinom2Boxes = new ArrayList();
+        ArrayList polinom2Labels = new ArrayList();
+
+        Field field;
+
+        ArrayList elements;
+
+        int polinom1Size;
+        int polinom2Size;
+
+        ArrayList firstPolinomialArray = new ArrayList();
+        ArrayList secondPolinomialArray = new ArrayList();
+
         public Form1()
         {
             InitializeComponent();
-        }
+            polinom1Labels.Add(label100);
+            polinom1Labels.Add(label101);
+            polinom1Labels.Add(label102);
+            polinom1Labels.Add(label103);
+            polinom1Labels.Add(label104);
+            polinom1Labels.Add(label105);
+            polinom1Labels.Add(label106);
+            polinom1Labels.Add(label107);
+            polinom1Labels.Add(label108);
+            polinom1Labels.Add(label109);
+            polinom1Labels.Add(label110);
 
-        internal Polinomial Field
-        {
-            get => default;
-            set
-            {
-            }
-        }
+            polinom1Boxes.Add(comboBox100);
+            polinom1Boxes.Add(comboBox101);
+            polinom1Boxes.Add(comboBox102);
+            polinom1Boxes.Add(comboBox103);
+            polinom1Boxes.Add(comboBox104);
+            polinom1Boxes.Add(comboBox105);
+            polinom1Boxes.Add(comboBox106);
+            polinom1Boxes.Add(comboBox107);
+            polinom1Boxes.Add(comboBox108);
+            polinom1Boxes.Add(comboBox109);
+            polinom1Boxes.Add(comboBox110);
 
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+            polinom2Labels.Add(label200);
+            polinom2Labels.Add(label201);
+            polinom2Labels.Add(label202);
+            polinom2Labels.Add(label203);
+            polinom2Labels.Add(label204);
+            polinom2Labels.Add(label205);
+            polinom2Labels.Add(label206);
+            polinom2Labels.Add(label207);
+            polinom2Labels.Add(label208);
+            polinom2Labels.Add(label209);
+            polinom2Labels.Add(label210);
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            byte q1;
-            byte q2;
-            try
-            {
-                q1 = Convert.ToByte(textBox1.Text);
-                q2 = Convert.ToByte(textBox2.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Проверьте корректность введёных данных");
-                return;
-            }
-           
-
-            if (textBox3.Text == "")
-            {
-                MessageBox.Show("Ответ: 0");
-            }
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            polinom2Boxes.Add(comboBox200);
+            polinom2Boxes.Add(comboBox201);
+            polinom2Boxes.Add(comboBox202);
+            polinom2Boxes.Add(comboBox203);
+            polinom2Boxes.Add(comboBox204);
+            polinom2Boxes.Add(comboBox205);
+            polinom2Boxes.Add(comboBox206);
+            polinom2Boxes.Add(comboBox207);
+            polinom2Boxes.Add(comboBox208);
+            polinom2Boxes.Add(comboBox209);
+            polinom2Boxes.Add(comboBox210);
         }
 
         public static string ReverseString(string s)
@@ -65,179 +100,274 @@ namespace PolinomialOperations
             return new string(arr);
         }
 
-        public static string CreatePolynom(byte s)
+        private bool isPrimeNumber(int number)
         {
-            string str1, res1 = "";
-            int i = 0;
-            str1 = Convert.ToString(s, 2);
-            str1 = ReverseString(str1);
-            foreach (char ch in str1)
+
+            if (number == 0 || number == 1)
             {
-                if (ch == '1')
-                {
-                    if (i == 0)
-                    {
-                        res1 = res1 + "1 +";
-                    }
-                    else
-                    {
-                        res1 = res1 + "x^" + Convert.ToString(i) + "+";
-                    }
-                }
-                i++;
-            };
-            try
-            {
-                res1 = res1.Remove(res1.Length - 1);
-            } catch (Exception)
-            {
-                res1 = "";
+                return false;
             }
-            
-            return res1;
+            else
+            {
+                for (int iterator = 2; iterator <= number / 2; iterator++)
+                {
+                    if (number % iterator == 0)
+                    {
+                        return false;
+                    }
+
+                }
+                return true;
+            }
         }
-        
-        private void button2_Click(object sender, EventArgs e)
+
+        private void initializeField() {
+            
+            boxes.Add(comboBox1);
+            boxes.Add(comboBox2);
+            boxes.Add(comboBox3);
+            boxes.Add(comboBox4);
+            boxes.Add(comboBox5);
+            boxes.Add(comboBox6);
+            boxes.Add(comboBox7);
+            
+            labels.Add(label3);
+            labels.Add(label4);
+            labels.Add(label5);
+            labels.Add(label6);
+            labels.Add(label7);
+            labels.Add(label8);
+            labels.Add(label9);
+            button4.Visible = true;
+            if (degree != 1)
+            {
+                label10.Visible = true;
+                
+                ((Label)labels[degree]).Text = "x^" + degree;
+                for (int i = 0; i <= degree; i++)
+                {
+                    ((ComboBox)boxes[i]).Visible = true;
+                    ((Label)labels[i]).Visible = true;
+                }
+            }
+            else
+            {
+                label10.Visible = false;
+
+                for (int i = 0; i <= MAX_DEGREE; i++)
+                {
+                    ((ComboBox)boxes[i]).Visible = false;
+                    ((Label)labels[i]).Visible = false;
+                }
+            }
+
+            for(int i = 0; i < boxes.Count; i++)
+            {
+                ((ComboBox)boxes[i]).Items.Clear();
+                for (int element = 0; element < prime; element++)
+                {
+                    ((ComboBox)boxes[i]).Items.Add(element);
+                }
+            }
+
+        }
+        private void button3_Click(object sender, EventArgs e)
         {
-            byte q1 = 0, q2 = 0;
             try
             {
-                q1 = Convert.ToByte(textBox1.Text);
-                q2 = Convert.ToByte(textBox2.Text);
+                prime = Convert.ToInt32(textBox1.Text);
+                if(prime > MAX_PRIME || prime < MIN_PRIME)
+                {
+                    throw new Exception();
+                }
+                if (!isPrimeNumber(prime))
+                {
+                    throw new Exception();
+                }
+                degree = Convert.ToInt32(textBox2.Text);
+                if(degree > MAX_DEGREE || degree < MIN_DEGREE)
+                {
+                    throw new Exception();
+                }
+                initializeField();
+                fieldSize = intPow(prime, degree);
             }
             catch (Exception)
             {
                 MessageBox.Show("Проверьте корректность введёных данных");
                 return;
             }
-            tb_polynom1.Text = CreatePolynom(q1);
-            tb_polynom2.Text = CreatePolynom(q2);
         }
 
-        private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Автор: Сергеев Денис Владиславович\nНазвание программы: Операции над многочленами в полях Галуа");
+
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void label8_Click(object sender, EventArgs e)
         {
-            if (comboBox1.Text == "^")
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private int intPow(int number, int deg)
+        {
+            int result = 1;
+            for(int i = 0; i < deg; i++)
             {
-                label9.Visible = true;
-                textBox4.Visible = true;
+                result = result * number;
             }
+            return result;
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ArrayList primitivePolinomial = new ArrayList();
+            for(int i = 0; i <= degree; i++)
+            {
+                primitivePolinomial.Add(Convert.ToInt32(((ComboBox)boxes[i]).Text));
+            }
+
+
+
+            field = new Field(fieldSize, prime, primitivePolinomial);
+            if (field.isPrimitivePolinomial(primitivePolinomial) || degree == 1)
+            {
+                button4.Visible = false;
+                label23.Visible = true;
+                label24.Visible = true;
+                comboBox51.Visible = true;
+                comboBox52.Visible = true;
+
+            }
+
             else
             {
-                label9.Visible = false;
-                textBox4.Visible = false;
+                //ввод заного
             }
+
+            
+
         }
 
-        private void загрузитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+        void inputPolinomials()
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.Filter = "Text files(*.text)|*.txt|All files(*.*)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            string filename = openFileDialog1.FileName;
-            System.IO.StreamReader sr;
-            try
+            label35.Visible = true;
+            label36.Visible = true;
+            ((Label)polinom1Labels[polinom1Size - 1]).Text = "x^" + (polinom1Size - 1);
+            ((Label)polinom2Labels[polinom2Size - 1]).Text = "x^" + (polinom2Size - 1);
+            for (int i = 0; i < polinom1Size; i++)
             {
-                sr = new System.IO.StreamReader(filename);
-            } catch
-            {
-                MessageBox.Show("Файл не удалось открыть");
-                return;
+                ((ComboBox)polinom1Boxes[i]).Visible = true;
+                ((Label)polinom1Labels[i]).Visible = true;
             }
 
-            string str;
-            string[] text;
-
-
-            str = sr.ReadLine();
-            text = str.Split(";");
-
-            if (text.Length == 2)
+            for (int i = 0; i < polinom2Size; i++)
             {
-                try
+                ((ComboBox)polinom2Boxes[i]).Visible = true;
+                ((Label)polinom2Labels[i]).Visible = true;
+            }
+
+            elements = field.getElements();
+            for(int i = 0; i < polinom1Size; i++)
+            {
+                for(int j = 0; j < elements.Count; j++)
                 {
-                    textBox1.Text = text[0];
-                    textBox2.Text = text[1];
-                } catch
-                {
-                    MessageBox.Show("Не удалось загрузить данные");
+                    ((ComboBox)polinom1Boxes[i]).Items.Add(Field.elementToString((ArrayList)elements[j]));
                 }
             }
 
-            sr.Close();
+            for (int i = 0; i < polinom2Size; i++)
+            {
+                for (int j = 0; j < elements.Count; j++)
+                {
+                    ((ComboBox)polinom2Boxes[i]).Items.Add(Field.elementToString((ArrayList)elements[j]));
+                }
+            }
         }
 
-        private void выгрузитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void label11_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Text files(*.text)|*.txt|All files(*.*)|*.*";
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            string filename = saveFileDialog1.FileName;
-           
-            System.IO.StreamWriter sw;
+
+        }
+
+        private void comboBox12_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox11_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox14_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
             try
             {
-                sw = new System.IO.StreamWriter(filename);
+                polinom1Size = Convert.ToInt32(comboBox51.Text);
+                polinom2Size = Convert.ToInt32(comboBox52.Text);
+                inputPolinomials();
             }
-            catch
+            catch (Exception)
             {
-                MessageBox.Show("Файл не удалось открыть");
+                MessageBox.Show("Проверьте корректность введёных данных");
                 return;
             }
 
-            try
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < polinom1Size; i++)
             {
-                sw.WriteLine("Входные данные: " + textBox1.Text + "     " + textBox2.Text);
-                sw.WriteLine("Получившиеся полиномы: " + tb_polynom1.Text + "   " + tb_polynom2.Text);
-                sw.WriteLine("Операция: " + comboBox1.Text);
-                sw.WriteLine("Итоговый результата: " + textBox3.Text);
-            } catch
-            {
-                MessageBox.Show("Не удалось записать данные в файл");
-                sw.Close();
-                return;
+                firstPolinomialArray.Add(elements[((ComboBox)polinom1Boxes[i]).SelectedIndex]);
             }
+
+            for (int i = 0; i < polinom2Size; i++)
+            {
+                secondPolinomialArray.Add(elements[((ComboBox)polinom2Boxes[i]).SelectedIndex]);
+            }
+
+            Polinomial firstPolinomial = new Polinomial(firstPolinomialArray, field);
+            Polinomial secondPolinomial = new Polinomial(secondPolinomialArray, field);
+
+            Polinomial result;
             
+            switch (comboBox8.SelectedItem.ToString())
+            {
+                case "+":
+                    result = firstPolinomial.sum(firstPolinomial, secondPolinomial);
+                    textBox3.Text = result.polinomialToString();
+                    break;
+                case "-":
+                    result = firstPolinomial.difference(firstPolinomial, secondPolinomial);
+                    textBox3.Text = result.polinomialToString();
+                    break;
+                case "*":
+                    result = firstPolinomial.multiply(firstPolinomial, secondPolinomial);
+                    textBox3.Text = result.polinomialToString();
+                    break;
+                case "|":
+                    result = firstPolinomial.divide(firstPolinomial, secondPolinomial);
+                    textBox3.Text = result.polinomialToString();
+                    break;
+            }
 
-            sw.Close();
             
-            MessageBox.Show("Файл сохранен");
-        }
-
-        private void tb_polynom1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

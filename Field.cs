@@ -305,7 +305,7 @@ namespace PolinomialOperations
         {
             return ((getFieldElementPosition(element) == -1) ? false : true);
         }
-        private bool isPrimitivePolinomial(ArrayList polinomial)
+        public bool isPrimitivePolinomial(ArrayList polinomial)
         {
             bool nullPolinomial = true;
             for (int polinomIterator = 0; polinomIterator < polinomial.Count; polinomIterator++)
